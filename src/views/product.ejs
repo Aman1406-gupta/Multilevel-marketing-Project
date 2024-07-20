@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Razorpay Web-Integration</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+
+<body>
+	<hr/>
+	
+		<div style="display:inline-block">
+			<img src="https://tse1.mm.bing.net/th?id=OIP.DKnMNGB6q4y3Iqtnt7X5WAHaHa&pid=Api&rs=1&c=1&qlt=95&w=120&h=120" alt="" width="100px" height="100px">
+			<p>Mailing</p>
+			<p><b>Amount:- Rs. 500</b></p>
+			<form class="pay-form">
+				<input type="hidden" name="name" value="Mailing">
+				<input type="hidden" name="amount" value="500">
+				<input type="hidden" name="description" value="Mailing Buying">
+				<input type="submit" value="Pay Now">
+			</form>
+		</div>
+
+		<div style="display:inline-block">
+			<img src="https://tse1.mm.bing.net/th?id=OIP.7ps1riDz36FNyLTMUcv8OQHaIx&pid=Api&rs=1&c=1&qlt=95&w=100&h=118" alt="" width="100px" height="100px">
+			<p>Calling</p>
+			<p><b>Amount:- Rs. 1500</b></p>
+			<form class="pay-form">
+				<input type="hidden" name="name" value="Calling">
+				<input type="hidden" name="amount" value="1500">
+				<input type="hidden" name="description" value="Calling Buying">
+				<input type="submit" value="Pay Now">
+			</form>
+		</div>
+	
+</body>
+
+</html>
+
+<!--Inside index.html -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+
+$(document).ready(function(){
+	$('.pay-form').submit(function(e){
+		e.preventDefault();
+
+		var formData = $(this).serialize();
+
+		$.ajax({
+			url:"/createOrder",
+			type:"POST",
+			data: formData,
+			success:function(res){
+				if(res.success){
+					var options = {
+						"key": ""+res.key_id+"",
+						"amount": ""+res.amount+"",
+						"currency": "INR",
+						"name": ""+res.product_name+"",
+						"description": ""+res.description+"",
+						"image": "https://dummyimage.com/600x400/000/fff",
+						"order_id": ""+res.order_id+"",
+						"handler": function (response){
+							alert("Payment Succeeded");
+							// window.open("/","_self")
+						},
+						"prefill": {
+							"contact":""+res.contact+"",
+							"name": ""+res.name+"",
+							"email": ""+res.email+""
+						},
+						"notes" : {
+							"description":""+res.description+""
+						},
+						"theme": {
+							"color": "#2300a3"
+						}
+					};
+					var razorpayObject = new Razorpay(options);
+					razorpayObject.on('payment.failed', function (response){
+							alert("Payment Failed");
+					});
+					razorpayObject.open();
+				}
+				else{
+					alert(res.msg);
+				}
+			}
+		})
+
+	});
+});
+
+</script>

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Tables / Data - NiceAdmin Bootstrap Template</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon" />
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link
+      href="assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet" />
+    <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet" />
+    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
+    <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet" />
+
+    <!-- Template Main CSS File -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- =======================================================
+  * Template Name: NiceAdmin - v2.2.0
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+  </head>
+
+  <body>
+    <%- include("../../../utils/header")%> <%- include("../../../utils/side")%>
+
+    <main id="main" class="main">
+      <div class="pagetitle">
+        <h1>Data Tables</h1>
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+            <li class="breadcrumb-item">Services</li>
+          </ol>
+        </nav>
+      </div>
+      <!-- End Page Title -->
+
+      <div class="card">
+        <div class="card-header">
+          <form
+            class="row g-3 needs-validation"
+            novalidate
+            action="/viewshare"
+            method="get"
+          >
+            <div class="col-md-4">
+              <label for="validationCustom01" class="form-label">Email</label>
+              <input type="text" class="form-control" id="validationCustom01"
+              value="<%=query.email?query.email:''%>"
+              name="email" placeholder="Search by email">
+              <div class="valid-feedback">Looks good!</div>
+            </div>
+
+            <div class="col-md-4">
+              <label for="validationCustom01" class="form-label">UserId</label>
+              <input type="text" class="form-control" id="validationCustom01"
+              value="<%=query.Id?query.Id:''%>"
+              name="Id" placeholder="Search by UserId">
+              <div class="valid-feedback">Looks good!</div>
+            </div>
+
+            <div class="col-md-4">
+              <label for="validationCustom01" class="form-label">Stock_Name</label>
+              <input type="text" class="form-control" id="validationCustom01"
+              value="<%=query.stock_name?query.stock_name:''%>"
+              name="stock_name" placeholder="Search by Stock_Name">
+              <div class="valid-feedback">Looks good!</div>
+            </div>
+
+
+            <div class="col-md-4">
+              <label for="validationCustom02" class="form-label">Status</label>
+              <select class="form-control" id="validationCustom02" name="status">
+                <option value="" <%= query.status === '' ? 'selected' : '' %>>Select</option>
+                <option value="pending" <%= query.status === 'pending' ? 'selected' : '' %>>Pending</option>
+                <option value="completed" <%= query.status === 'completed' ? 'selected' : '' %>>Completed</option>
+                <option value="cancelled" <%= query.status === 'cancelled' ? 'selected' : '' %>>Cancelled</option>             
+              </select>
+              
+              <div class="valid-feedback">Looks good!</div>
+            </div>
+            <div class="col-md-4">
+              <label for="validationCustom02" class="form-label">Type</label>
+              <select class="form-control" id="validationCustom02" name="type">
+                <option value="" <%= query.type === '' ? 'selected' : '' %>>Select</option>
+                <option value="buy" <%= query.type === 'buy' ? 'selected' : '' %>>Buy</option>
+                <option value="sell" <%= query.type === 'sell' ? 'selected' : '' %>>Sell</option>
+              </select>
+              
+              <div class="valid-feedback">Looks good!</div>
+            </div>
+
+
+
+            <div class="col-md-4">
+              <label for="validationCustom02" class="form-label">StockType</label>
+              <select class="form-control" id="validationCustom02" name="stock_type">
+                <option value="" <%= query.stock_type === '' ? 'selected' : '' %> >MCX</option>
+                <option value="NSE" <%= query.stock_type === 'NSE' ? 'selected' : '' %>>NSE</option>
+              </select>
+              
+              <div class="valid-feedback">Looks good!</div>
+            </div>
+
+
+
+
+
+
+
+            <div class="col-md-4">
+              <label for="validationCustom02" class="form-label">Lots</label>
+              <input type="text" class="form-control" id="validationCustom02"
+              value="<%=query.lots?query.lots:''%>"
+              name="lots" placeholder="Search by lots">
+              <div class="valid-feedback">Looks good!</div>
+            </div>
+            <div class="col-md-4">
+              <label for="validationCustom02" class="form-label"
+                >Expected_Amounts</label
+              >
+              <input type="text" class="form-control" id="validationCustom02"
+              value="<%=query.expected_amount?query.expected_amount:''%>"
+              name="expected_amount" placeholder="Search by amount">
+              <div class="valid-feedback">Looks good!</div>
+            </div>
+            <div class="col-12">
+              <button class="btn btn-primary" type="submit">Submit form</button>
+            </div>
+          </form>
+          <!-- End Custom Styled Validation -->
+        </div>
+      </div>
+
+      <!-- 
+            <div class="card">
+                <div class="card-header">
+        
+                    <form class="filter" action="/filteruser" method='post'>  
+                        <label><b>Name</b></label>
+                        <input type="text" name="filtername">  
+                        <label><b>Email</b></label>
+                        <input type="" name="filteremail">
+                        <label><b>Mobile</b></label>
+                        <input type="text" name="filtermobile">
+                        <input type="submit" value="Filter"></form>
+                    </div>
+                    </div> -->
+
+      <section class="section">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card" style="overflow-x: scroll">
+              <div class="card-body">
+                <h5 class="card-title">Datatables</h5>
+                <!-- Table with stripped rows -->
+                <table class="table datatable">
+                  <thead>
+                    <tr>
+                      <th scope="col">S No.</th>
+                      <th scope="col">UserId</th>
+                      <th scope="col">Email</th>
+                      
+                     
+                      <th scope="col">Share_Name</th>
+                      <th scope="col">Status</th>
+                      <th scope="col">Lots</th>
+                      <th scope="col">Type</th>
+                      <th scope="col">Transaction_Points</th>
+                      <th scope="col">brokrage</th>
+                      <th scope="col">Total_Amount</th>
+                      <th scope="col">Date(mm/dd/yy)</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <div>
+                      <%let i=1; %> <% for (let dataobj of data){ %>
+                      <tr>
+                        <%
+                        // Assuming dateStr contains the date string "2023-12-03T17:41:46.536+00:00"
+                        const dateStr = dataobj.createdAt;
+                      
+                        // Parse the date string into a Date object
+                        const date = new Date(dateStr);
+                      
+                        // Format the date as "yy-mm-dd"
+                        const formattedDate = date.toLocaleDateString('en-US', {
+                          year: 'numeric',
+                          month: '2-digit',
+                          day: '2-digit',
+                          hour:"2-digit",
+                          minute:"2-digit",
+                          second:"2-digit",
+                        });
+                      %>
+                        <th scope="row"><%=i%></th>
+
+                        <td><%=dataobj.Id%></td>
+                        <td><%=dataobj.email%></td>
+                       
+                        <td><%=dataobj.stock_name%></td>
+                        <td><%=dataobj.status%></td>
+                        <td><%=dataobj.lots%></td>
+                        <td><%=dataobj.type%></td>
+                        <td><%=(dataobj.expected_amount).toFixed(2)%></td>
+                        <td><%=dataobj.brokrage%></td>
+                        <td><%= (Number(dataobj.brokrage) * Number(dataobj.expected_amount) * Number(dataobj.lots)).toFixed(2) %></td> <!--without lot size but add this later -->
+                        <td><%=formattedDate%></td>
+                        <%id=dataobj._id.toString();%>
+                       
+                       
+                      </tr>
+                      <% i=i+1; }%>
+                    </div>
+                  </tbody>
+                </table>
+                <!-- End Table with stripped rows -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- End #main -->
+
+    <%- include("../../../utils/footer")%>
+
+    <a
+      href="#"
+      class="back-to-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/chart.js/chart.min.js"></script>
+    <script src="assets/vendor/echarts/echarts.min.js"></script>
+    <script src="assets/vendor/quill/quill.min.js"></script>
+    <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>

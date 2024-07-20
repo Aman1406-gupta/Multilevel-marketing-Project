@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Tables / Data - NiceAdmin Bootstrap Template</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon" />
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link
+      href="assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet" />
+    <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet" />
+    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
+    <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet" />
+
+    <!-- Template Main CSS File -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- =======================================================
+  * Template Name: NiceAdmin - v2.2.0
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+  </head>
+
+  <body>
+    <%- include("../../../utils/header")%> <%- include("../../../utils/side")%>
+
+    <main id="main" class="main">
+      <div class="pagetitle">
+        <h1>Data Tables</h1>
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+            <li class="breadcrumb-item">Transaction</li>
+          </ol>
+        </nav>
+      </div>
+      <!-- End Page Title -->
+
+      <section class="section">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-header">
+                <form
+                  class="row g-3 needs-validation"
+                  novalidate
+                  action="/filtertransaction"
+                  method="post"
+                >
+                  <div class="col-md-4">
+                    <label for="validationCustom01" class="form-label"
+                      >User Email</label
+                    >
+                    
+                    <input type="text" class="form-control"
+                    id="validationCustom01"
+                    value="<%=searchdata?.filteremail?searchdata?.filteremail:""%>"
+                    name="filteremail" placeholder="Search by User Email">
+                    <div class="valid-feedback">Looks good!</div>
+                  </div>
+
+
+
+                  <div class="col-md-4">
+                    <label for="validationCustom01" class="form-label"
+                      >UserId</label
+                    >
+                    
+                    <input type="text" class="form-control"
+                    id="validationCustom01"
+                    value="<%=searchdata?.filterId?searchdata?.filterId:""%>"
+                    name="filterId" placeholder="Search by UserId">
+                    <div class="valid-feedback">Looks good!</div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <label for="validationCustom01" class="form-label"
+                      >From Date</label
+                    >
+                    <input type="date" class="form-control"
+                    id="validationCustom01"
+                    value="<%=searchdata?.filterfromdate?searchdata?.filterfromdate:""%>"
+                    name="filterfromdate" placeholder="Search by From Date">
+                    <div class="valid-feedback">Looks good!</div>
+                  </div>
+                  <div class="col-md-4">
+                    <label for="validationCustom01" class="form-label"
+                      >To Date</label
+                    >
+                    <input type="date" class="form-control"
+                    id="validationCustom01"
+                    value="<%=searchdata?.filtertodate?searchdata?.filtertodate:""%>"
+                    name="filtertodate" placeholder="Search by To Date">
+                    <div class="valid-feedback">Looks good!</div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <label for="validationCustom02" class="form-label"
+                      >Amount</label
+                    >
+                    <input type="text" class="form-control"
+                    id="validationCustom02"
+                    value="<%=searchdata?.filteramount?searchdata?.filteramount:""%>"
+                    name="filteramount" placeholder="Search by Amount">
+                    <div class="valid-feedback">Looks good!</div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <label for="validationCustom02" class="form-label">StockType</label>
+                    <select class="form-control" id="validationCustom02" name="filter_stock_type">
+                      <option value="all" <%= searchdata.filter_stock_type === '' ? 'selected' : '' %> >SELECT ALL</option>
+                      <option value="" <%= searchdata.filter_stock_type === '' ? 'selected' : '' %> >MCX</option>
+                      <option value="NSE" <%= searchdata.filter_stock_type === 'NSE' ? 'selected' : '' %>>NSE</option>
+                    </select>
+                    
+                    <div class="valid-feedback">Looks good!</div>
+                  </div>
+                  
+
+                  <div class="col-md-4">
+                    <label for="validationCustom02" class="form-label">Status</label>
+                    <select class="form-control" id="validationCustom02" name="status">
+                      <option value="" <%= searchdata.status === '' ? 'selected' : '' %>>Select</option>
+                      <option value="credited" <%= searchdata.status === 'credited' ? 'selected' : '' %>>credited</option>
+                      <option value="debited" <%= searchdata.status === 'debited' ? 'selected' : '' %>>debited</option>
+                      
+                    </select>
+                   
+                    
+                    <div class="valid-feedback">Looks good!</div>
+                  </div>
+                  <div class="col-12">
+                    <button class="btn btn-primary" type="submit">
+                      Submit form
+                    </button>
+                  </div>
+                </form>
+                <!-- End Custom Styled Validation -->
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Datatables</h5>
+
+                <!-- Table with stripped rows -->
+                <table class="table datatable">
+                  <thead>
+                    <tr>
+                      <th scope="col">S No.</th>
+                      <th scope="col">UserId</th>
+                      <th scope="col">Email</th>
+                      
+                      
+                      <th scope="col">Transaction_Points</th>
+                      <th scope="col">Type</th>
+                      <th scope="col">Status</th>
+                      <th scope="col">Date(mm/dd/yy)</th>
+                      
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <%let i=1; %> <% for (let dataobj of transaction){ %>
+                    <tr>
+                      <%
+  // Assuming dateStr contains the date string "2023-12-03T17:41:46.536+00:00"
+  const dateStr = dataobj.createdAt;
+
+  // Parse the date string into a Date object
+  const date = new Date(dateStr);
+
+  // Format the date as "yy-mm-dd"
+  const formattedDate = date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour:"2-digit",
+    minute:"2-digit",
+    second:"2-digit",
+  });
+%>
+                      <th scope="row"><%=i%></th>
+                      <td><%=dataobj.Id%></td>
+                      <td><%=dataobj.email%></td>
+                      
+                      <td><%=Number(dataobj.amount).toFixed(2)%></td>
+                      <td><%=dataobj.type%></td>
+                     
+                      <td><%=dataobj.status%></td>
+                      
+                      <td><%=formattedDate%></td>
+                     
+                      <%id=dataobj._id.toString();%>
+
+                      <!-- <td>
+                        <form
+                          class="filter"
+                          action="/detail_transaction"
+                          method="post"
+                        >
+                          <input type="hidden" name="id" value="<%=id%>" />
+                          <input type="submit" value="Detail" />
+                        </form>
+                      </td> -->
+                    </tr>
+                    <% i=i+1; }%>
+                  </tbody>
+                </table>
+                <!-- End Table with stripped rows -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <%- include("../../../utils/flash")%>
+      </section>
+    </main>
+    <!-- End #main -->
+
+    <%- include("../../../utils/footer")%>
+
+    <a
+      href="#"
+      class="back-to-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/chart.js/chart.min.js"></script>
+    <script src="assets/vendor/echarts/echarts.min.js"></script>
+    <script src="assets/vendor/quill/quill.min.js"></script>
+    <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
