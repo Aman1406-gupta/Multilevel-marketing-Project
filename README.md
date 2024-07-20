@@ -7,7 +7,7 @@ Users can buy products and can add others.
 Whenever amount is added in account of user 75% of it divides among parents.This happens at each level.
 There are many other functioning.
 
-Frontend is made by ejs,HTML,CSS(Vanilla and Bootstrap),Java Script.
+Frontend is made by ejs,CSS(Vanilla and Bootstrap),Java Script.
 
 Backend is made by JS,express,node and nodemailler.
 
