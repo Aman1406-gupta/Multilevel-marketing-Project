@@ -7,7 +7,7 @@ async function email(){
         service:"gmail",
         auth:{
                 user:"aman1406gupta@gmail.com",
-                pass:"mclt sxxb sjom veci",
+                pass:"Change it ot your PASSWORD",
         },
     });
     
